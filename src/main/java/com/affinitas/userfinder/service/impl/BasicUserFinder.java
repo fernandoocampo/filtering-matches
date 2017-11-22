@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.affinitas.userfinder.service;
+package com.affinitas.userfinder.service.impl;
+
 
 /**
  * Implements user finder business logic to search users with given filters.
@@ -11,5 +12,4 @@ package com.affinitas.userfinder.service;
  * @author Fernando Ocampo
  */
 public class BasicUserFinder {
-    
 }

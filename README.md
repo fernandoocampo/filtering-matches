@@ -7,3 +7,4 @@ assumptions
 - The data of the database contains values that I will considered simulated.
     + contacts_exchanged
     + compatibility_score
+- There is not business logic, for that reason a service layer is not required and controller goes directly to dao layer.
