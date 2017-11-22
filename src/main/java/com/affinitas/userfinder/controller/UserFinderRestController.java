@@ -5,8 +5,8 @@
  */
 package com.affinitas.userfinder.controller;
 
+import com.affinitas.userfinder.dao.UserDAO;
 import com.affinitas.userfinder.model.User;
-import com.affinitas.userfinder.service.UserFinderService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserFinderRestController {
     
     @Autowired
-    UserFinderService userfinderservice;
+    UserDAO userdao;
 
     /**
      * Implementation of the user search capability for <code>/userfinder</code> 
