@@ -7,7 +7,8 @@
       "city": {
         "name": "Leeds",
         "lat": 53.801277,
-        "lon": -1.548567
+        "lon": -1.548567,
+        "loc": [-1.548567,53.801277]
       },
       "main_photo": "http://thecatapi.com/api/images/get?format=src&type=gif",
       "compatibility_score": 0.76,
@@ -23,7 +24,8 @@
       "city": {
         "name": "Solihull",
         "lat": 52.412811,
-        "lon": -1.778197
+        "lon": -1.778197,
+        "loc": [-1.778197,52.412811]
       },
       "main_photo": "http://thecatapi.com/api/images/get?format=src&type=gif",
       "compatibility_score": 0.97,
@@ -39,7 +41,8 @@
       "city": {
         "name": "Cardiff",
         "lat": 51.481583,
-        "lon": -3.179090
+        "lon": -3.179090,
+        "loc": [-3.179090,51.481583]
       },
       "main_photo": "http://thecatapi.com/api/images/get?format=src&type=gif",
       "compatibility_score": 0.47,
@@ -55,7 +58,8 @@
       "city": {
         "name": "Eastbourne",
         "lat": 50.768036,
-        "lon": 0.290472
+        "lon": 0.290472,
+        "loc": [0.290472,50.768036]
       },
       "main_photo": "http://thecatapi.com/api/images/get?format=src&type=gif",
       "compatibility_score": 0.95,
@@ -71,7 +75,8 @@
       "city": {
         "name": "London",
         "lat": 51.509865,
-        "lon": -0.118092
+        "lon": -0.118092,
+        "loc": [-0.118092,51.509865]
       },
       "main_photo": "http://thecatapi.com/api/images/get?format=src&type=gif",
       "compatibility_score": 0.88,
@@ -87,7 +92,8 @@
       "city": {
         "name": "London",
         "lat": 51.509865,
-        "lon": -0.118092
+        "lon": -0.118092,
+        "loc": [-0.118092,51.509865]
       },
       "compatibility_score": 0.87,
       "contacts_exchanged": 4,
@@ -102,7 +108,8 @@
       "city": {
         "name": "London",
         "lat": 51.509865,
-        "lon": -0.118092
+        "lon": -0.118092,
+        "loc": [-0.118092,51.509865]
       },
       "main_photo": "http://thecatapi.com/api/images/get?format=src&type=gif",
       "compatibility_score": 0.83,
@@ -118,7 +125,8 @@
       "city": {
         "name": "Swindon",
         "lat": 51.568535,
-        "lon": -1.772232
+        "lon": -1.772232,
+        "loc": [-1.772232,51.568535]
       },
       "main_photo": "http://thecatapi.com/api/images/get?format=src&type=gif",
       "compatibility_score": 0.89,
@@ -134,7 +142,8 @@
       "city": {
         "name": "Oxford",
         "lat": 51.752022,
-        "lon": -1.257677
+        "lon": -1.257677,
+        "loc": [-1.257677,51.752022]
       },
       "main_photo": "http://thecatapi.com/api/images/get?format=src&type=gif",
       "compatibility_score": 0.91,
@@ -150,7 +159,8 @@
       "city": {
         "name": "Salisbury",
         "lat": 51.068787,
-        "lon": -1.794472
+        "lon": -1.794472,
+        "loc": [-1.794472,51.068787]
       },
       "main_photo": "http://thecatapi.com/api/images/get?format=src&type=gif",
       "compatibility_score": 0.97,
@@ -166,7 +176,8 @@
       "city": {
         "name": "Weymouth",
         "lat": 50.614429,
-        "lon": -2.457621
+        "lon": -2.457621,
+        "loc": [-2.457621,50.614429]
       },
       "compatibility_score": 0.94,
       "contacts_exchanged": 0,
@@ -181,7 +192,8 @@
       "city": {
         "name": "Bournemouth",
         "lat": 50.720806,
-        "lon": -1.904755
+        "lon": -1.904755,
+        "loc": [-1.904755,50.720806]
       },
       "main_photo": "http://thecatapi.com/api/images/get?format=src&type=gif",
       "compatibility_score": 0.90,
@@ -197,7 +209,8 @@
       "city": {
         "name": "Plymouth",
         "lat": 50.376289,
-        "lon": -4.143841
+        "lon": -4.143841,
+        "loc": [-4.143841,50.376289]
       },
       "main_photo": "http://thecatapi.com/api/images/get?format=src&type=gif",
       "compatibility_score": 0.89,
@@ -213,7 +226,8 @@
       "city": {
         "name": "Inverness",
         "lat": 57.477772,
-        "lon": -4.224721
+        "lon": -4.224721,
+        "loc": [-4.224721,57.477772]
       },
       "main_photo": "http://thecatapi.com/api/images/get?format=src&type=gif",
       "compatibility_score": 0.87,
@@ -229,7 +243,8 @@
       "city": {
         "name": "Aberdeen",
         "lat": 57.149651,
-        "lon": -2.099075
+        "lon": -2.099075,
+        "loc": [-2.099075,57.149651]
       },
       "main_photo": "http://thecatapi.com/api/images/get?format=src&type=gif",
       "compatibility_score": 0.87,
@@ -245,7 +260,8 @@
       "city": {
         "name": "Ayr",
         "lat": 55.458565,
-        "lon": -4.629179
+        "lon": -4.629179,
+        "loc": [-4.629179,55.458565]
       },
       "main_photo": "http://thecatapi.com/api/images/get?format=src&type=gif",
       "compatibility_score": 0.93,
@@ -261,7 +277,8 @@
       "city": {
         "name": "Belfast",
         "lat": 54.607868,
-        "lon": -5.926437
+        "lon": -5.926437,
+        "loc": [-5.926437,54.607868]
       },
       "main_photo": "http://thecatapi.com/api/images/get?format=src&type=gif",
       "compatibility_score": 0.89,
@@ -277,7 +294,8 @@
       "city": {
         "name": "Londonderry",
         "lat": 55.006763,
-        "lon": -7.318268
+        "lon": -7.318268,
+        "loc": [-7.318268,55.006763]
       },
       "main_photo": "http://thecatapi.com/api/images/get?format=src&type=gif",
       "compatibility_score": 0.83,
@@ -293,7 +311,8 @@
       "city": {
         "name": "Leeds",
         "lat": 53.801277,
-        "lon": -1.548567
+        "lon": -1.548567,
+        "loc": [-1.548567,53.801277]
       },
       "main_photo": "http://thecatapi.com/api/images/get?format=src&type=gif",
       "compatibility_score": 0.73,
@@ -309,7 +328,8 @@
       "city": {
         "name": "London",
         "lat": 51.509865,
-        "lon": -0.118092
+        "lon": -0.118092,
+        "loc": [-0.118092,51.509865]
       },
       "main_photo": "http://thecatapi.com/api/images/get?format=src&type=gif",
       "compatibility_score": 0.50,
@@ -325,7 +345,8 @@
       "city": {
         "name": "London",
         "lat": 51.509865,
-        "lon": -0.118092
+        "lon": -0.118092,
+        "loc": [-0.118092,51.509865]
       },
       "compatibility_score": 0.88,
       "contacts_exchanged": 10,
@@ -340,7 +361,8 @@
       "city": {
         "name": "Swindon",
         "lat": 51.568535,
-        "lon": -1.772232
+        "lon": -1.772232,
+        "loc": [-1.772232,51.568535]
       },
       "main_photo": "http://thecatapi.com/api/images/get?format=src&type=gif",
       "compatibility_score": 0.88,
@@ -356,7 +378,8 @@
       "city": {
         "name": "Bournemouth",
         "lat": 50.720806,
-        "lon": -1.904755
+        "lon": -1.904755,
+        "loc": [-1.904755,50.720806]
       },
       "main_photo": "http://thecatapi.com/api/images/get?format=src&type=gif",
       "compatibility_score": 0.76,
@@ -372,7 +395,8 @@
       "city": {
         "name": "London",
         "lat": 51.509865,
-        "lon": -0.118092
+        "lon": -0.118092,
+        "loc": [-0.118092,51.509865]
       },
       "main_photo": "http://thecatapi.com/api/images/get?format=src&type=gif",
       "compatibility_score": 0.99,
@@ -388,7 +412,8 @@
       "city": {
         "name": "Harlow",
         "lat": 51.772938,
-        "lon": 0.102310
+        "lon": 0.102310,
+        "loc": [0.102310,51.772938]
       },
       "main_photo": "http://thecatapi.com/api/images/get?format=src&type=gif",
       "compatibility_score": 0.88,

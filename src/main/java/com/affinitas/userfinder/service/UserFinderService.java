@@ -5,6 +5,7 @@
  */
 package com.affinitas.userfinder.service;
 
+import com.affinitas.userfinder.model.FilterException;
 import com.affinitas.userfinder.model.SearchException;
 import com.affinitas.userfinder.model.SearchVO;
 import com.affinitas.userfinder.model.User;
@@ -22,7 +23,8 @@ public interface UserFinderService {
      * 
      * @param searchData parameters for the search.
      * @return a set of users that match the given search data.
+     * @throws FilterException if the given search data is not allowed.
      * @throws SearchException if something is wrong with the search.
      */
-    List<User> findUsers(SearchVO searchData) throws SearchException;
+    List<User> findUsers(SearchVO searchData) throws FilterException, SearchException;
 }

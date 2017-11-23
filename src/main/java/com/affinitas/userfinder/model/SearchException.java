@@ -11,5 +11,9 @@ package com.affinitas.userfinder.model;
  * @author Fernando Ocampo
  */
 public class SearchException extends Exception {
+
+    public SearchException(String message) {
+        super(message);
+    }
     
 }

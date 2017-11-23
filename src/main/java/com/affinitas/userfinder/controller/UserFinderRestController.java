@@ -5,6 +5,8 @@
  */
 package com.affinitas.userfinder.controller;
 
+import com.affinitas.userfinder.model.FilterException;
+import com.affinitas.userfinder.model.Result;
 import com.affinitas.userfinder.model.SearchException;
 import com.affinitas.userfinder.model.SearchVO;
 import com.affinitas.userfinder.model.User;
@@ -58,7 +60,7 @@ public class UserFinderRestController {
      * @return A collection of users that match the filters.
      */
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public ResponseEntity<List<User>> search(
+    public ResponseEntity<Result> search(
             @RequestParam(name = "hasphoto", required = false) Boolean hasphoto, 
             @RequestParam(name = "incontact", required = false) Boolean incontact,
             @RequestParam(name = "isfavourite", required = false) Boolean isfavourite,
@@ -69,7 +71,8 @@ public class UserFinderRestController {
             @RequestParam(name = "minheight", required = false) Integer minheight,
             @RequestParam(name = "maxheight", required = false) Integer maxheight,
             @RequestParam(name = "distance", required = false) Integer distance) {
-        List<User> result = new ArrayList();
+        Result response = new Result();
+        List<User> userresult = new ArrayList();
         
         // build the search filter 
         SearchVO parameters = new SearchVO();
@@ -87,10 +90,17 @@ public class UserFinderRestController {
         parameters.setMinHeight(minheight);
         
         try {
-            result = service.findUsers(parameters);
+            userresult = service.findUsers(parameters);
+            response.setUserdata(userresult);
         } catch (SearchException ex) {
-            return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
+            response.setMessage(ex.getMessage());
+            response.setUserdata(userresult);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (FilterException fex) {
+            response.setMessage(fex.getMessage());
+            response.setUserdata(userresult);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

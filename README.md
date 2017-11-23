@@ -12,3 +12,4 @@ assumptions
 - The database used in this service hypotetically is a robust and well known database in the industry.
 - I assume that in Contact filter is if the match is in the contacts of the user that made the search. Then for this filter I will match all objects which contacts_exchanged is greater than 1
 - This release only have a database repository and support the current amount of requests.
+- I assume to increase the performance of the application the company decided to add an array for localization on city attribute. it has the form: loc: [lon,lat]

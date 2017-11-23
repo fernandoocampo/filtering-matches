@@ -13,6 +13,8 @@ import com.affinitas.userfinder.model.UserFilter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -47,8 +49,14 @@ public class UserMongoDAO implements UserDAO {
         buildBooleansFilters(filter, query);
         // build criteria using filters that are ranges for custom query
         buildRangesFilters(filter, query);
-
-        List<User> result = mongoTemplate.find(query, User.class, "users");
+        
+        List<User> result;
+        try {
+          result = mongoTemplate.find(query, User.class, "users");
+        } catch (Exception ex) {
+              Logger.getLogger(UserMongoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new SearchException("Something goes wrong with the search.");
+        }
         
         return result;
     }

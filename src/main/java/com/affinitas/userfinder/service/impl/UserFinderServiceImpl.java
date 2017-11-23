@@ -7,6 +7,7 @@ package com.affinitas.userfinder.service.impl;
 
 import com.affinitas.userfinder.dao.UserDAO;
 import com.affinitas.userfinder.model.Range;
+import com.affinitas.userfinder.model.FilterException;
 import com.affinitas.userfinder.model.SearchException;
 import com.affinitas.userfinder.model.SearchVO;
 import com.affinitas.userfinder.model.User;
@@ -32,10 +33,10 @@ public class UserFinderServiceImpl implements UserFinderService {
 
     @Autowired
     UserDAO dao;
-    
+
     @Autowired
     ConfigProperties globalconfig;
-    
+
     @Autowired
     AppProperties appconfig;
 
@@ -47,18 +48,19 @@ public class UserFinderServiceImpl implements UserFinderService {
      * @param searchdata Given parameters to build the filter required by the
      * DAO.
      * @return a set of users that match the given search data.
+     * @throws SearchException if there is an error on data validation or something
+     * is wrong when the dao is invoked.
+     * @throws FilterException if the given filters for search are invalid. e.g. the
+     * ranges are not allowed.
      */
     @Override
-    public List<User> findUsers(SearchVO searchdata) {
+    public List<User> findUsers(SearchVO searchdata) throws FilterException, SearchException {
         List<User> result;
+        // check that the given values are allowed.
+        validateFiltersRanges(searchdata);
         UserFilter filter = buildUserFilter(searchdata);
         if (filter != null) {
-            try {
-                result = dao.findUsers(filter);
-            } catch (SearchException ex) {
-                Logger.getLogger(UserFinderServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
-                result = new ArrayList<>();
-            }
+            result = dao.findUsers(filter);
         } else {
             result = new ArrayList<>();
         }
@@ -76,18 +78,18 @@ public class UserFinderServiceImpl implements UserFinderService {
         if (searchdata == null) {
             return null; // there is nothing to query.
         }
+        
         UserFilter filter = new UserFilter();
         Range agerange = new Range(searchdata.getMinAge(), searchdata.getMaxAge());
-        System.out.println("config----------->: " + appconfig.getDefaultMaximumAge());
         agerange.setDefaultMinimum(appconfig.getDefaultMinimumAge());
         agerange.setDefaultMaximum(appconfig.getDefaultMaximumAge());
-        filter.setAge(agerange );
-        
+        filter.setAge(agerange);
+
         Range heightrange = new Range(searchdata.getMinHeight(), searchdata.getMaxHeight());
         heightrange.setDefaultMinimum(appconfig.getDefaultMinimumHeight());
         heightrange.setDefaultMaximum(appconfig.getDefaultMaximumHeight());
         filter.setHeight(heightrange);
-        
+
         Range compabilityscorerange = new Range(searchdata.getMinCompabilityScore(), searchdata.getMaxCompabilityScore());
         compabilityscorerange.setDefaultMinimum(appconfig.getDefaultMinCompabilityScore());
         compabilityscorerange.setDefaultMaximum(appconfig.getDefaultMaxCompabilityScore());
@@ -98,6 +100,54 @@ public class UserFinderServiceImpl implements UserFinderService {
         filter.setInContact(searchdata.getInContact());
         filter.setIsFavourite(searchdata.getIsFavourite());
         return filter;
+    }
+
+    /**
+     * Validate that the filters that contains ranges don't exceed the minimum
+     * and maximum values allowed.
+     *
+     * @param searchdata the given data for user searching.
+     * @throws FilterException if some ranges exceed the allowed values.
+     */
+    void validateFiltersRanges(SearchVO searchdata) throws FilterException {
+        if (searchdata == null) {
+            return; // nothing to validate.
+        }
+        // check the minimum and maximum age
+        if (searchdata.getMinAge() != null && searchdata.getMinAge() < appconfig.getDefaultMinimumAge()) {
+            throw new FilterException("The given minimum age is not allowed, you must search at least with: "
+                    + appconfig.getDefaultMinimumAge());
+        }
+
+        if (searchdata.getMaxAge() != null && searchdata.getMaxAge() > appconfig.getDefaultMaximumAge()) {
+            throw new FilterException("The given maximum age is not allowed, you must search at most with: "
+                    + appconfig.getDefaultMaximumAge());
+        }
+        // check the minumum and mmaximum height 
+        if (searchdata.getMinHeight() != null && searchdata.getMinHeight() < appconfig.getDefaultMinimumHeight()) {
+            throw new FilterException("The given minimum height is not allowed, you must search at least with: "
+                    + appconfig.getDefaultMinimumHeight() + " cms");
+        }
+
+        if (searchdata.getMaxHeight() != null && searchdata.getMaxHeight() > appconfig.getDefaultMaximumHeight()) {
+            throw new FilterException("The given maximum height is not allowed, you must search at most with: "
+                    + appconfig.getDefaultMaximumHeight() + " cms");
+        }
+        
+        // check the minumum and mmaximum compatibility. 
+        if (searchdata.getMinCompabilityScore()!= null && 
+                searchdata.getMinCompabilityScore() < appconfig.getDefaultMinCompabilityScore()) {
+            throw new FilterException("The given minimum compatibility score is not allowed, you must search at least with: "
+                    + appconfig.getDefaultMinCompabilityScore());
+        }
+
+        if (searchdata.getMaxCompabilityScore()!= null && 
+                searchdata.getMaxCompabilityScore() > appconfig.getDefaultMaxCompabilityScore()) {
+            throw new FilterException("The given maximum compatibility score is not allowed, you must search at most with: "
+                    + appconfig.getDefaultMaxCompabilityScore());
+        }
+        
+        
     }
 
 }
