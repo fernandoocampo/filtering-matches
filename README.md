@@ -7,3 +7,8 @@ assumptions
 - The data of the database contains values that I will considered simulated.
     + contacts_exchanged
     + compatibility_score
+- There is not business logic, for that reason a service layer is not required and controller goes directly to dao layer.
+- The database used in this service is static and not have mutations capabilities, just reading.
+- The database used in this service hypotetically is a robust and well known database in the industry.
+- I assume that in Contact filter is if the match is in the contacts of the user that made the search. Then for this filter I will match all objects which contacts_exchanged is greater than 1
+- This release only have a database repository and support the current amount of requests.

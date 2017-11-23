@@ -1,0 +1,4 @@
+FROM mongo:latest
+
+COPY matches.json /matches.json
+CMD mongoimport --host mongodb --db affinitas --collection users --file /matches.json --jsonArray

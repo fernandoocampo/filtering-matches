@@ -5,6 +5,8 @@
  */
 package com.affinitas.userfinder.controller;
 
+import com.affinitas.userfinder.model.SearchException;
+import com.affinitas.userfinder.model.SearchVO;
 import com.affinitas.userfinder.model.User;
 import com.affinitas.userfinder.service.UserFinderService;
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserFinderRestController {
     
     @Autowired
-    UserFinderService userfinderservice;
+    UserFinderService service;
 
     /**
      * Implementation of the user search capability for <code>/userfinder</code> 
@@ -56,17 +58,39 @@ public class UserFinderRestController {
      * @return A collection of users that match the filters.
      */
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public ResponseEntity<List<User>> search(@RequestParam(name = "hasphoto") Boolean hasphoto, 
+    public ResponseEntity<List<User>> search(
+            @RequestParam(name = "hasphoto", required = false) Boolean hasphoto, 
             @RequestParam(name = "incontact", required = false) Boolean incontact,
             @RequestParam(name = "isfavourite", required = false) Boolean isfavourite,
-            @RequestParam(name = "mincompatibilityscore", required = false) Byte mincompatibilityscore,
-            @RequestParam(name = "maxcompatibilityscore", required = false) Byte maxcompatibilityscore,
-            @RequestParam(name = "minage", required = false) Byte minage,
-            @RequestParam(name = "maxage", required = false) Byte maxage,
-            @RequestParam(name = "minheight", required = false) Short minheight,
-            @RequestParam(name = "maxheight", required = false) Short maxheight,
-            @RequestParam(name = "distance", required = false) Short distance) {
+            @RequestParam(name = "mincompatibilityscore", required = false) Integer mincompatibilityscore,
+            @RequestParam(name = "maxcompatibilityscore", required = false) Integer maxcompatibilityscore,
+            @RequestParam(name = "minage", required = false) Integer minage,
+            @RequestParam(name = "maxage", required = false) Integer maxage,
+            @RequestParam(name = "minheight", required = false) Integer minheight,
+            @RequestParam(name = "maxheight", required = false) Integer maxheight,
+            @RequestParam(name = "distance", required = false) Integer distance) {
         List<User> result = new ArrayList();
+        
+        // build the search filter 
+        SearchVO parameters = new SearchVO();
+        
+        parameters.setDistance(distance);
+        parameters.setFavourite(isfavourite);
+        parameters.setHasPhoto(hasphoto);
+        parameters.setInContact(incontact);
+        parameters.setIsFavourite(isfavourite);
+        parameters.setMaxAge(maxage);
+        parameters.setMaxCompabilityScore(maxcompatibilityscore);
+        parameters.setMaxHeight(maxheight);
+        parameters.setMinAge(minage);
+        parameters.setMinCompabilityScore(mincompatibilityscore);
+        parameters.setMinHeight(minheight);
+        
+        try {
+            result = service.findUsers(parameters);
+        } catch (SearchException ex) {
+            return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

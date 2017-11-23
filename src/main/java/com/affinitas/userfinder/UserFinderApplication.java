@@ -6,18 +6,24 @@
 package com.affinitas.userfinder;
 
 import com.affinitas.userfinder.controller.UserFinderRestController;
+import com.affinitas.userfinder.dao.impl.UserMongoDAO;
+import com.affinitas.userfinder.service.UserFinderService;
+import com.affinitas.userfinder.util.ConfigProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * This is the class that starts the user-finder service.
  * 
  * @author Fernando.Ocampo
  */
-
-@EnableAutoConfiguration
-@ComponentScan(basePackageClasses = UserFinderRestController.class)
+//@Configuration
+//@EnableAutoConfiguration
+@SpringBootApplication
+@ComponentScan(basePackageClasses = {UserFinderRestController.class, ConfigProperties.class, UserFinderService.class, UserMongoDAO.class})
 public class UserFinderApplication {    
 
     public static void main(String[] args) throws Exception {

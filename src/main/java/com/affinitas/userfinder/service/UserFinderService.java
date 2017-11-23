@@ -6,24 +6,23 @@
 package com.affinitas.userfinder.service;
 
 import com.affinitas.userfinder.model.SearchException;
+import com.affinitas.userfinder.model.SearchVO;
 import com.affinitas.userfinder.model.User;
-import com.affinitas.userfinder.model.UserFilter;
 import java.util.List;
 
 /**
- * Defines the behavior of user search.
+ * Contains the business logic to search users that match the search data.
  * 
- * @author Fernando Ocampo
+ * @author Fernando.Ocampo
  */
 public interface UserFinderService {
-    
-    
     /**
-     * Search and return a set of users that match the given filters.
+     * find users that match the given search data. It is in charge to call
+     * the data repository to query users with the given filters.
      * 
-     * @param filter contains the filters to apply in the search.
-     * @return set of users that match the given filters.
-     * @throws SearchException if there is an error when executing the search.
+     * @param searchData parameters for the search.
+     * @return a set of users that match the given search data.
+     * @throws SearchException if something is wrong with the search.
      */
-    List<User> search(UserFilter filter) throws SearchException;
+    List<User> findUsers(SearchVO searchData) throws SearchException;
 }
