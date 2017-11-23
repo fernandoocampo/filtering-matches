@@ -73,6 +73,12 @@ curl -g 'http://localhost:8080/userfinder?distanceinkm=30&inquirerlongitude=0.18
 curl -g 'http://localhost:8080/userfinder?distanceinkm=300&inquirerlongitude=0.187&inquirerlatitude=2.345&distancelowerbound=false'
 ```
 
+* To check if the service is up, we can use the /health endpoint.
+
+```sh
+curl -g 'http://localhost:8080/health'
+```
+
 ### How do I get set up? ###
 
 1. Download the source code from github.com at [here](https://github.com/fernandoocampo/user-finder)
