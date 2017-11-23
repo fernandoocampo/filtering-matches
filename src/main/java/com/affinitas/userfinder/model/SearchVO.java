@@ -7,11 +7,12 @@ package com.affinitas.userfinder.model;
 
 /**
  * Value Object that contains search parameters values.
- * 
+ *
  * @author Fernando.Ocampo
  */
 public class SearchVO {
-/**
+
+    /**
      * Filter to indicate if the user has a photo.
      */
     private Boolean hasPhoto;
@@ -55,6 +56,20 @@ public class SearchVO {
      * Filter to indicate if the user is a favourite one.
      */
     private Boolean Favourite;
+    /**
+     * The longitude position of the inquirer.
+     */
+    private Double inquirerlongitude;
+    /**
+     * The latitude position of the inquirer.
+     */
+    private Double inquirerlatitude;
+    /**
+     * Indicates if the distance to search must be applied to the users that are
+     * near to the inquirer. if it is false it refers to a distance upper bound
+     * to the inquirer.
+     */
+    private Boolean distancelowerbound;
 
     public Boolean getHasPhoto() {
         return hasPhoto;
@@ -142,5 +157,29 @@ public class SearchVO {
 
     public void setFavourite(Boolean Favourite) {
         this.Favourite = Favourite;
+    }
+
+    public Double getInquirerlongitude() {
+        return inquirerlongitude;
+    }
+
+    public void setInquirerlongitude(Double inquirerlongitude) {
+        this.inquirerlongitude = inquirerlongitude;
+    }
+
+    public Double getInquirerlatitude() {
+        return inquirerlatitude;
+    }
+
+    public void setInquirerlatitude(Double inquirerlatitude) {
+        this.inquirerlatitude = inquirerlatitude;
+    }
+
+    public Boolean isDistancelowerbound() {
+        return distancelowerbound;
+    }
+
+    public void setDistancelowerbound(Boolean distancelowerbound) {
+        this.distancelowerbound = distancelowerbound;
     }
 }

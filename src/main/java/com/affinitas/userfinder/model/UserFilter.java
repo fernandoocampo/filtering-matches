@@ -14,6 +14,17 @@ import java.util.Map;
  * @author Fernando Ocampo
  */
 public class UserFilter {
+    
+    public static enum DistanceLogic {
+        /**
+         * Greater Than.
+         */
+        GT,
+        /**
+         * Less than.
+         */
+        LT
+    }
 
     /**
      * Types of filters supported for this service.
@@ -64,9 +75,24 @@ public class UserFilter {
      */
     private Range height;
     /**
+     * Distance logic to indicate if the distance for the localization search
+     * must be greater or less than the position of the searching users.
+     */
+    private DistanceLogic distanceLogic;
+    /**
      * FilterKey to indicate the distance in km where the matching users are.
      */
     private Integer distance;
+    /**
+     * Contains the longitude of the positional reference point to query
+     * the users.
+     */
+    private Double longitude;
+    /**
+     * Contains the latitude of the positional reference point to query
+     * the users.
+     */
+    private Double latitude;
 
     public UserFilter() {
         this.rangesFilters = new HashMap<>();
@@ -150,6 +176,22 @@ public class UserFilter {
         this.distance = distance;
     }
 
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
     public Map<FilterKey, Range> getRangesFilters() {
         return rangesFilters;
     }
@@ -157,8 +199,23 @@ public class UserFilter {
     public Map<FilterKey, Boolean> getBooleansFilters() {
         return booleansFilters;
     }
+    
+    /**
+     * @return true if there is enough information to make a geolocalization search.
+     */
+    public boolean isThereDistanceFilter() {
+        return (this.distance != null && this.longitude != null && this.latitude != null);
+    }
 
     public boolean thereAreFilters() {
         return !this.booleansFilters.isEmpty() && !this.rangesFilters.isEmpty();
+    }
+
+    public DistanceLogic getDistanceLogic() {
+        return distanceLogic;
+    }
+
+    public void setDistanceLogic(DistanceLogic distanceLogic) {
+        this.distanceLogic = distanceLogic;
     }
 }

@@ -55,7 +55,10 @@ public class UserFinderRestController {
      * @param maxage The maximum user age given.
      * @param minheight The minimum user height given.
      * @param maxheight The maximum user height given.
-     * @param distance Range distance that user should have.
+     * @param distanceinkm distance in km of users to search.
+     * @param inquirerlongitude inquirer longitude.
+     * @param inquirerlatitude inquirer latitude.
+     * @param distancelowerbound true if it is a minimum distance.
      * 
      * @return A collection of users that match the filters.
      */
@@ -70,14 +73,16 @@ public class UserFinderRestController {
             @RequestParam(name = "maxage", required = false) Integer maxage,
             @RequestParam(name = "minheight", required = false) Integer minheight,
             @RequestParam(name = "maxheight", required = false) Integer maxheight,
-            @RequestParam(name = "distance", required = false) Integer distance) {
+            @RequestParam(name = "distanceinkm", required = false) Integer distanceinkm,
+            @RequestParam(name = "inquirerlongitude", required = false) Double inquirerlongitude,
+            @RequestParam(name = "inquirerlatitude", required = false) Double inquirerlatitude,
+            @RequestParam(name = "distancelowerbound", required = false) Boolean distancelowerbound) {
         Result response = new Result();
         List<User> userresult = new ArrayList();
         
         // build the search filter 
         SearchVO parameters = new SearchVO();
         
-        parameters.setDistance(distance);
         parameters.setFavourite(isfavourite);
         parameters.setHasPhoto(hasphoto);
         parameters.setInContact(incontact);
@@ -88,6 +93,10 @@ public class UserFinderRestController {
         parameters.setMinAge(minage);
         parameters.setMinCompabilityScore(mincompatibilityscore);
         parameters.setMinHeight(minheight);
+        parameters.setDistance(distanceinkm);
+        parameters.setInquirerlongitude(inquirerlongitude);
+        parameters.setInquirerlatitude(inquirerlatitude);
+        parameters.setDistancelowerbound(distancelowerbound);
         
         try {
             userresult = service.findUsers(parameters);

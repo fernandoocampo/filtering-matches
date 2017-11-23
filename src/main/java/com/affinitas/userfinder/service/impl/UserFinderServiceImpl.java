@@ -12,13 +12,12 @@ import com.affinitas.userfinder.model.SearchException;
 import com.affinitas.userfinder.model.SearchVO;
 import com.affinitas.userfinder.model.User;
 import com.affinitas.userfinder.model.UserFilter;
+import com.affinitas.userfinder.model.UserFilter.DistanceLogic;
 import com.affinitas.userfinder.service.UserFinderService;
 import com.affinitas.userfinder.util.AppProperties;
 import com.affinitas.userfinder.util.ConfigProperties;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,6 +57,8 @@ public class UserFinderServiceImpl implements UserFinderService {
         List<User> result;
         // check that the given values are allowed.
         validateFiltersRanges(searchdata);
+        // check if the distance value is valid. just if the distance is given.
+        validateDistanceFilter(searchdata);
         UserFilter filter = buildUserFilter(searchdata);
         if (filter != null) {
             result = dao.findUsers(filter);
@@ -95,10 +96,20 @@ public class UserFinderServiceImpl implements UserFinderService {
         compabilityscorerange.setDefaultMaximum(appconfig.getDefaultMaxCompabilityScore());
         filter.setCompabilityScore(compabilityscorerange);
 
-        filter.setDistance(searchdata.getDistance());
         filter.setHasPhoto(searchdata.getHasPhoto());
         filter.setInContact(searchdata.getInContact());
         filter.setIsFavourite(searchdata.getIsFavourite());
+        
+        // position filters
+        filter.setDistance(searchdata.getDistance());
+        filter.setLongitude(searchdata.getInquirerlongitude());
+        filter.setLatitude(searchdata.getInquirerlatitude());
+        
+        if(searchdata.isDistancelowerbound() != null && searchdata.isDistancelowerbound()) {
+            filter.setDistanceLogic(DistanceLogic.LT);
+        } else {
+            filter.setDistanceLogic(DistanceLogic.GT);
+        }
         return filter;
     }
 
@@ -148,6 +159,20 @@ public class UserFinderServiceImpl implements UserFinderService {
         }
         
         
+    }
+    
+    /**
+     * Validate if the given distance in km in the parameter has a valid
+     * value. At this release the a number less than 1 is considered invalid.
+     * 
+     * @param searchdata filter data for the search.
+     * @throws FilterException if the distance in km value is not valid.
+     */
+    void validateDistanceFilter(SearchVO searchdata) throws FilterException {
+        if(searchdata != null && searchdata.getDistance() != null &&
+                searchdata.getDistance() < 1) {
+            throw new FilterException("The given distance in km is not a valid distance value, distance must be a value greater than 0");
+        }
     }
 
 }

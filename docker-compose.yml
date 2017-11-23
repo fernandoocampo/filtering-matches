@@ -12,8 +12,28 @@ services:
 
     # Load init data into mongo
     mongo-init:
-        build:
-            context: ./
-            dockerfile: Dockerfile.mongoinit
+        image: mongo:latest
+        command: >
+            mongoimport --host mongodb --db affinitas --collection users --file /matches.json --jsonArray
         links:
             - mongodb
+        volumes:
+            - ./matches.json:/matches.json
+
+    # Create index in mongo
+    mongo-index:
+        image: mongo:latest
+        command: >
+            mongo --host mongodb affinitas  --eval "db.users.createIndex( { 'city.loc': '2dsphere' } )"
+        links:
+            - mongodb
+
+    # backend service
+    backend-svc:
+        build:
+            context: ./
+            dockerfile: Dockerfile.backend
+        links:
+            - mongodb
+        ports:
+            - 8080:8080
