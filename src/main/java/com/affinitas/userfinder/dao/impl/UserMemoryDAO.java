@@ -6,6 +6,7 @@
 package com.affinitas.userfinder.dao.impl;
 
 import com.affinitas.userfinder.dao.UserDAO;
+import com.affinitas.userfinder.dao.UserDAO;
 import com.affinitas.userfinder.model.SearchException;
 import com.affinitas.userfinder.model.User;
 import com.affinitas.userfinder.model.UserFilter;

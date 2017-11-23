@@ -5,52 +5,76 @@
  */
 package com.affinitas.userfinder.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Contains filters which will be used for user search.
- * 
+ *
  * @author Fernando Ocampo
  */
 public class UserFilter {
+
     /**
-     * Filter to indicate if the user has a photo.
+     * Types of filters supported for this service.
+     */
+    public static enum FilterKey {
+        HAS_PHOTO,
+        IN_CONTACT,
+        FAVOURITE,
+        COMPABILITY_SCORE,
+        AGE,
+        HEIGHT,
+        DISTANCE
+    }
+
+    /**
+     * Contains the selected filters which are ranges.
+     */
+    private final Map<FilterKey, Range> rangesFilters;
+    /**
+     * Contains the selected filters which are booleans.
+     */
+    private final Map<FilterKey, Boolean> booleansFilters;
+    /**
+     * FilterKey to indicate if the user has a photo.
      */
     private Boolean hasPhoto;
     /**
-     * Filter to indicate if the user is in contact.
+     * FilterKey to indicate if the user is in contact.
      */
     private Boolean inContact;
     /**
-     * Filter to indicate if the user is a favourite one.
+     * FilterKey to indicate if the user is a favourite one.
      */
     private Boolean isFavourite;
     /**
-     * Filter to indicate the minimum level required.
+     * FilterKey to indicate the minimum and maximum level of compability
+     * required.
      */
-    private Byte minCompabilityScore;
+    private Range compabilityScore;
     /**
-     * Filter to indicate the maximum level of compatability required.
+     * FilterKey to indicate the minimum and maximun age the client are looking
+     * for.
      */
-    private Byte maxCompabilityScore;
+    private Range age;
     /**
-     * Filter to indicate the minimum age the client are looking for.
+     * FilterKey to indicate the minimum and maximum height the client are
+     * looking for.
      */
-    private Byte minAge;
+    private Range height;
     /**
-     * Filter to indicate the maximum age the client are looking for.
+     * FilterKey to indicate the distance in km where the matching users are.
      */
-    private Byte maxAge;
-    /**
-     * Filter to indicate the minimum height the client are looking for.
-     */
-    private Short minHeight;
-    /**
-     * Filter to indicate the maximum height the client are looking for.
-     */
-    private Short maxHeight;
-    /**
-     * Filter to indicate the distance in km where the matching users are.
-     */
-    private Short distance;
+    private Integer distance;
+
+    public UserFilter() {
+        this.rangesFilters = new HashMap<>();
+        this.booleansFilters = new HashMap<>();
+        this.compabilityScore = new Range();
+        this.age = new Range();
+        this.height = new Range();
+    }
 
     public Boolean getHasPhoto() {
         return hasPhoto;
@@ -58,6 +82,9 @@ public class UserFilter {
 
     public void setHasPhoto(Boolean hasPhoto) {
         this.hasPhoto = hasPhoto;
+        if (hasPhoto != null) {
+            this.booleansFilters.put(FilterKey.HAS_PHOTO, this.hasPhoto);
+        }
     }
 
     public Boolean getInContact() {
@@ -66,6 +93,9 @@ public class UserFilter {
 
     public void setInContact(Boolean inContact) {
         this.inContact = inContact;
+        if (inContact != null) {
+            this.booleansFilters.put(FilterKey.IN_CONTACT, this.inContact);
+        }
     }
 
     public Boolean getIsFavourite() {
@@ -74,61 +104,61 @@ public class UserFilter {
 
     public void setIsFavourite(Boolean isFavourite) {
         this.isFavourite = isFavourite;
+        if (isFavourite != null) {
+            this.booleansFilters.put(FilterKey.FAVOURITE, this.isFavourite);
+        }
     }
 
-    public Byte getMinCompabilityScore() {
-        return minCompabilityScore;
+    public Range getCompabilityScore() {
+        return compabilityScore;
     }
 
-    public void setMinCompabilityScore(Byte minCompabilityScore) {
-        this.minCompabilityScore = minCompabilityScore;
+    public void setCompabilityScore(Range compabilityScore) {
+        this.compabilityScore = compabilityScore;
+        if (compabilityScore != null) {
+            this.rangesFilters.put(FilterKey.COMPABILITY_SCORE, compabilityScore);
+        }
     }
 
-    public Byte getMaxCompabilityScore() {
-        return maxCompabilityScore;
+    public Range getAge() {
+        return age;
     }
 
-    public void setMaxCompabilityScore(Byte maxCompabilityScore) {
-        this.maxCompabilityScore = maxCompabilityScore;
+    public void setAge(Range age) {
+        this.age = age;
+        if (age != null) {
+            this.rangesFilters.put(FilterKey.AGE, age);
+        }
     }
 
-    public Byte getMinAge() {
-        return minAge;
+    public Range getHeight() {
+        return height;
     }
 
-    public void setMinAge(Byte minAge) {
-        this.minAge = minAge;
+    public void setHeight(Range height) {
+        this.height = height;
+        if (height != null) {
+            this.rangesFilters.put(FilterKey.HEIGHT, height);
+        }
     }
 
-    public Byte getMaxAge() {
-        return maxAge;
-    }
-
-    public void setMaxAge(Byte maxAge) {
-        this.maxAge = maxAge;
-    }
-
-    public Short getMinHeight() {
-        return minHeight;
-    }
-
-    public void setMinHeight(Short minHeight) {
-        this.minHeight = minHeight;
-    }
-
-    public Short getMaxHeight() {
-        return maxHeight;
-    }
-
-    public void setMaxHeight(Short maxHeight) {
-        this.maxHeight = maxHeight;
-    }
-
-    public Short getDistance() {
+    public Integer getDistance() {
         return distance;
     }
 
-    public void setDistance(Short distance) {
+    public void setDistance(Integer distance) {
         this.distance = distance;
+    }
+
+    public Map<FilterKey, Range> getRangesFilters() {
+        return rangesFilters;
+    }
+
+    public Map<FilterKey, Boolean> getBooleansFilters() {
+        return booleansFilters;
+    }
+
+    public boolean thereAreFilters() {
+        return !this.booleansFilters.isEmpty() && !this.rangesFilters.isEmpty();
     }
 }

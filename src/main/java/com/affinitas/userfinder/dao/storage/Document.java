@@ -24,6 +24,10 @@ public class Document {
      */
     private String jobtile;
     /**
+     * the height of a user.
+     */
+    private Short height;
+    /**
      * Main photo of the user.
      */
     private String mainphoto;
@@ -52,6 +56,10 @@ public class Document {
      * longitude of the user position.
      */
     private Float lon;
+    /**
+     * if user is favourite.
+     */
+    private Boolean favourite;
 
     public String getDisplayname() {
         return displayname;
@@ -131,5 +139,30 @@ public class Document {
 
     public void setLon(Float lon) {
         this.lon = lon;
+    }
+
+    public Short getHeight() {
+        return height;
+    }
+
+    public void setHeight(Short height) {
+        this.height = height;
+    }
+
+    public Boolean isFavourite() {
+        boolean result = false;
+        if (favourite == null) {
+            result = favourite;
+        }
+        return result;
+    }
+
+    public void setFavourite(Boolean favourite) {
+        this.favourite = favourite;
+    }
+
+    @Override
+    public String toString() {
+        return "Document{" + "displayname=" + displayname + ", age=" + age + ", jobtile=" + jobtile + ", height=" + height + ", mainphoto=" + mainphoto + ", compatabilityScore=" + compatabilityScore + ", contactsExchanged=" + contactsExchanged + ", religion=" + religion + ", cityname=" + cityname + ", lat=" + lat + ", lon=" + lon + '}';
     }
 }
