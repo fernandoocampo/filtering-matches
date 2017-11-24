@@ -207,8 +207,9 @@ public class UserFilter {
         return (this.distance != null && this.longitude != null && this.latitude != null);
     }
 
-    public boolean thereAreFilters() {
-        return !this.booleansFilters.isEmpty() && !this.rangesFilters.isEmpty();
+    public boolean areThereFilters() {
+        return !this.booleansFilters.isEmpty() || !this.rangesFilters.isEmpty() ||
+                isThereDistanceFilter();
     }
 
     public DistanceLogic getDistanceLogic() {

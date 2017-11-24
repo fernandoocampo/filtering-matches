@@ -62,7 +62,7 @@ public class UserFilterTest {
         
         // THEN we test that the filter is well built.
                 
-        assertTrue(filter.thereAreFilters());
+        assertTrue(filter.areThereFilters());
         assertFalse(filter.getBooleansFilters().isEmpty());
         assertFalse(filter.getRangesFilters().isEmpty());
         assertTrue(filter.getAge().hasMinimumAndMaximum());

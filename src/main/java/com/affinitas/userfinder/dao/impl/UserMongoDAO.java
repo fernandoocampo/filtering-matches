@@ -46,7 +46,7 @@ public class UserMongoDAO implements UserDAO {
     @Override
     public List<User> findUsers(UserFilter filter) throws SearchException {
         // if there is not a filter an empty array must be returned.
-        if (filter == null || !filter.thereAreFilters()) {
+        if (filter == null || !filter.areThereFilters()) {
             return new ArrayList<>();
         }
         Query query = new Query();
@@ -63,7 +63,7 @@ public class UserMongoDAO implements UserDAO {
             if (filter.isThereDistanceFilter()) {
                 result = findUsersUsingGeolocalization(filter, query);
             } else {
-                result = findUsersUsingNormalQuery(filter, query);
+                result = findUsersUsingNormalQuery(query);
             }
         } catch (Exception ex) {
             // don't propagate the same exception and just print it in the log.
@@ -77,11 +77,10 @@ public class UserMongoDAO implements UserDAO {
     /**
      * Executes a normal <code>Query</code> to search users.
      *
-     * @param filter Data to search the users.
      * @param query the query that contains criteria.
      * @return a set of users that match the given filters.
      */
-    private List<User> findUsersUsingNormalQuery(UserFilter filter, Query query) {
+    private List<User> findUsersUsingNormalQuery(Query query) {
         return mongoTemplate.find(query, User.class, "users");
     }
 
