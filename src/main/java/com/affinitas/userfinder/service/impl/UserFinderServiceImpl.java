@@ -47,10 +47,10 @@ public class UserFinderServiceImpl implements UserFinderService {
      * @param searchdata Given parameters to build the filter required by the
      * DAO.
      * @return a set of users that match the given search data.
-     * @throws SearchException if there is an error on data validation or something
-     * is wrong when the dao is invoked.
-     * @throws FilterException if the given filters for search are invalid. e.g. the
-     * ranges are not allowed.
+     * @throws SearchException if there is an error on data validation or
+     * something is wrong when the dao is invoked.
+     * @throws FilterException if the given filters for search are invalid. e.g.
+     * the ranges are not allowed.
      */
     @Override
     public List<User> findUsers(SearchVO searchdata) throws FilterException, SearchException {
@@ -79,33 +79,39 @@ public class UserFinderServiceImpl implements UserFinderService {
         if (searchdata == null) {
             return null; // there is nothing to query.
         }
-        
+
         UserFilter filter = new UserFilter();
-        Range agerange = new Range(searchdata.getMinAge(), searchdata.getMaxAge());
-        agerange.setDefaultMinimum(appconfig.getDefaultMinimumAge());
-        agerange.setDefaultMaximum(appconfig.getDefaultMaximumAge());
-        filter.setAge(agerange);
+        if (searchdata.getMinAge() != null || searchdata.getMaxAge() != null) {
+            Range agerange = new Range(searchdata.getMinAge(), searchdata.getMaxAge());
+            agerange.setDefaultMinimum(appconfig.getDefaultMinimumAge());
+            agerange.setDefaultMaximum(appconfig.getDefaultMaximumAge());
+            filter.setAge(agerange);
+        }
 
-        Range heightrange = new Range(searchdata.getMinHeight(), searchdata.getMaxHeight());
-        heightrange.setDefaultMinimum(appconfig.getDefaultMinimumHeight());
-        heightrange.setDefaultMaximum(appconfig.getDefaultMaximumHeight());
-        filter.setHeight(heightrange);
+        if (searchdata.getMinHeight() != null || searchdata.getMaxHeight() != null) {
+            Range heightrange = new Range(searchdata.getMinHeight(), searchdata.getMaxHeight());
+            heightrange.setDefaultMinimum(appconfig.getDefaultMinimumHeight());
+            heightrange.setDefaultMaximum(appconfig.getDefaultMaximumHeight());
+            filter.setHeight(heightrange);
+        }
 
-        Range compabilityscorerange = new Range(searchdata.getMinCompabilityScore(), searchdata.getMaxCompabilityScore());
-        compabilityscorerange.setDefaultMinimum(appconfig.getDefaultMinCompabilityScore());
-        compabilityscorerange.setDefaultMaximum(appconfig.getDefaultMaxCompabilityScore());
-        filter.setCompabilityScore(compabilityscorerange);
+        if (searchdata.getMinCompabilityScore() != null || searchdata.getMaxCompabilityScore() != null) {
+            Range compabilityscorerange = new Range(searchdata.getMinCompabilityScore(), searchdata.getMaxCompabilityScore());
+            compabilityscorerange.setDefaultMinimum(appconfig.getDefaultMinCompabilityScore());
+            compabilityscorerange.setDefaultMaximum(appconfig.getDefaultMaxCompabilityScore());
+            filter.setCompabilityScore(compabilityscorerange);
+        }
 
         filter.setHasPhoto(searchdata.getHasPhoto());
         filter.setInContact(searchdata.getInContact());
         filter.setIsFavourite(searchdata.getIsFavourite());
-        
+
         // position filters
         filter.setDistance(searchdata.getDistance());
         filter.setLongitude(searchdata.getInquirerlongitude());
         filter.setLatitude(searchdata.getInquirerlatitude());
-        
-        if(searchdata.isDistancelowerbound() != null && searchdata.isDistancelowerbound()) {
+
+        if (searchdata.isDistancelowerbound() != null && searchdata.isDistancelowerbound()) {
             filter.setDistanceLogic(DistanceLogic.LT);
         } else {
             filter.setDistanceLogic(DistanceLogic.GT);
@@ -144,33 +150,32 @@ public class UserFinderServiceImpl implements UserFinderService {
             throw new FilterException("The given maximum height is not allowed, you must search at most with: "
                     + appconfig.getDefaultMaximumHeight() + " cms");
         }
-        
+
         // check the minumum and mmaximum compatibility. 
-        if (searchdata.getMinCompabilityScore()!= null && 
-                searchdata.getMinCompabilityScore() < appconfig.getDefaultMinCompabilityScore()) {
+        if (searchdata.getMinCompabilityScore() != null
+                && searchdata.getMinCompabilityScore() < appconfig.getDefaultMinCompabilityScore()) {
             throw new FilterException("The given minimum compatibility score is not allowed, you must search at least with: "
                     + appconfig.getDefaultMinCompabilityScore());
         }
 
-        if (searchdata.getMaxCompabilityScore()!= null && 
-                searchdata.getMaxCompabilityScore() > appconfig.getDefaultMaxCompabilityScore()) {
+        if (searchdata.getMaxCompabilityScore() != null
+                && searchdata.getMaxCompabilityScore() > appconfig.getDefaultMaxCompabilityScore()) {
             throw new FilterException("The given maximum compatibility score is not allowed, you must search at most with: "
                     + appconfig.getDefaultMaxCompabilityScore());
         }
-        
-        
+
     }
-    
+
     /**
-     * Validate if the given distance in km in the parameter has a valid
-     * value. At this release the a number less than 1 is considered invalid.
-     * 
+     * Validate if the given distance in km in the parameter has a valid value.
+     * At this release the a number less than 1 is considered invalid.
+     *
      * @param searchdata filter data for the search.
      * @throws FilterException if the distance in km value is not valid.
      */
     void validateDistanceFilter(SearchVO searchdata) throws FilterException {
-        if(searchdata != null && searchdata.getDistance() != null &&
-                searchdata.getDistance() < 1) {
+        if (searchdata != null && searchdata.getDistance() != null
+                && searchdata.getDistance() < 1) {
             throw new FilterException("The given distance in km is not a valid distance value, distance must be a value greater than 0");
         }
     }

@@ -108,11 +108,21 @@ docker-compose up
     * if maximum value is set and minimum not, the service searches from the minimum configured default value until the given maximum value.
 
 * The service is in charge to validate the input data. The search parameters will be validated in the service layer.
+
 * The service with one node and just a node in the database are enough to support the current number of transactions.
+
 * The database used in this service hypotetically is a robust.
+
 * I assume that incontact filter means all those users that are contacts of the inquirer user. 
     * Then for this filter I will match all objects which contacts_exchanged is greater than 1.
+
 * I assume that the user json structure required a little modification to increase the performance on distance searching.
     * The IT team decided to add an array for localization on city attribute and it will has the form: loc: [lon,lat] .
+
 * I assume that for distance filter if user doesn't give all the data required for localization, the service ignores this filter.
+
 * I assume that the service is in a DMZ (DeMilitarized Zone) and it allows connection from any server.
+
+* I assume that the client captures the user geo position to calculate the distance where the service must start to search.
+
+* I assume that the service should not validate if the latitude and longitude are valid values.
