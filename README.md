@@ -115,3 +115,4 @@ docker-compose up
 * I assume that the user json structure required a little modification to increase the performance on distance searching.
     * The IT team decided to add an array for localization on city attribute and it will has the form: loc: [lon,lat] .
 * I assume that for distance filter if user doesn't give all the data required for localization, the service ignores this filter.
+* I assume that the service is in a DMZ (DeMilitarized Zone) and it allows connection from any server.
