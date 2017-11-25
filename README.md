@@ -99,6 +99,8 @@ docker-compose up
 
 ### Assumptions ###
 
+* I am stronger on the backend side.
+
 * All filters to search are not required.
 
 * If client doesn't search any filter the system should return an empty array. 
