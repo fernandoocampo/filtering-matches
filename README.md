@@ -11,7 +11,7 @@ This service exposes a capability to search users that match a set of filters.
 
 ## How to execute this project ##
 
-* Docker (17.09) and Docker-compose (1.15.0) is required.
+* Docker (17.09) and Docker-compose (1.16.0) is required.
 
 * Clone the project:
 
