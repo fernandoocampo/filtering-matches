@@ -9,6 +9,24 @@ This service exposes a capability to search users that match a set of filters.
 * /src Java code implementation is just a back end using java and spring-boot technology.
 * /ui Angular code implementation is the User Interface to search users using a set of filters.
 
+## How to execute this project ##
+
+* Docker and Docker-compose is required.
+
+* Clone the project:
+
+```sh
+git clone https://github.com/fernandoocampo/user-finder.git
+cd ./user-finder
+```
+
+* Execute docker-compose and wait the project is built.
+
+```sh
+docker-compose up
+```
+
+* Open your Internet browser and go to: http://localhost
 
 ## Using service ##
 
@@ -105,7 +123,7 @@ curl -g 'http://localhost:8080/health'
 
 **Frontend**
 
-* Found it on ./ui/user-matches-app folder.
+* Find it on ./ui/user-matches-app folder.
 
 * Visual Studio Code 1.18.1.
 
@@ -163,8 +181,7 @@ docker-compose down
 * I assume that incontact filter means all those users that are contacts of the inquirer user. 
     * Then for this filter I will match all objects which contacts_exchanged is greater than 1.
 
-* I assume that the user json structure required a little modification to increase the performance on distance searching.
-    * The IT team decided to add an array for localization on city attribute and it will has the form: loc: [lon,lat] .
+* To be able to use mongodb geospatial queries, I have modified the provided matches.json adding an array for localization on city attribute and it has the form loc: [lon,lat].
 
 * I assume that for distance filter if user doesn't give all the data required for localization, the service ignores this filter.
 
