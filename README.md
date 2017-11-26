@@ -85,9 +85,38 @@ curl -g 'http://localhost:8080/health'
 
 2. For development process you will need:
 
+**Backend**
+
+* Java jdk1.8.0_111
+
 * Maven [installer](https://maven.apache.org/download.cgi)
 
-* Any IDE that can read maven projects.
+* Any IDE that can read maven projects. I used Netbeans 8.2.
+
+**Frontend**
+
+* Found it on ./ui/user-matches-app folder.
+
+* Visual Studio Code 1.18.1.
+
+* npm 3.10.10
+
+* @angular/cli 1.5.4
+
+* @angular/compiler-cli ^5.0.0
+
+* if you wish to execute the frontend from console, you could do the following:
+
+```sh
+ng serve --open
+```
+
+* If you want to test the frontend, please execute the following.
+
+```sh
+ng test
+```
+
 
 3. To run the service and let it ready for consume, docker is required.
 
@@ -96,6 +125,13 @@ curl -g 'http://localhost:8080/health'
 ```sh
 docker-compose up
 ```
+
+when finish please destroy the containers
+
+```sh
+docker-compose down
+```
+
 
 ### Assumptions ###
 

@@ -1,0 +1,132 @@
+<div id="matches-component">
+
+  <div class="container">
+    <h1>Search Form</h1>
+    <form>
+      <div class="form-group">
+        <label for="hasphoto">has photo?</label>
+        <select name="hasphoto" id="hasphoto" class="form-control" [(ngModel)]="model.hasphoto">
+          <option value=""></option>
+          <option value="true">yes</option>
+          <option value="false">no</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="incontact">is in contact?</label>
+        <select name="incontact" id="incontact" class="form-control" [(ngModel)]="model.incontact">
+          <option value=""></option>
+          <option value="true">yes</option>
+          <option value="false">no</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="isfavourite">is favourite?</label>
+        <select name="isfavourite" id="isfavourite" class="form-control" [(ngModel)]="model.isfavourite">
+          <option value=""></option>
+          <option value="true">yes</option>
+          <option value="false">no</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="compatibilityscore">Compatibility score range</label>
+        <div name="compatibilityscore">
+          <div class="form-group">
+            <label for="mincompatibilityscore">Min</label>
+            <select name="mincompatibilityscore" id="mincompatibilityscore" class="form-control" [(ngModel)]="model.mincompatibilityscore">
+              <option value=""></option>
+              <option *ngFor="let score of scores" value="{{score}}">{{score}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="maxcompatibilityscore">Max</label>
+            <select name="maxcompatibilityscore" id="maxcompatibilityscore" class="form-control" [(ngModel)]="model.maxcompatibilityscore">
+              <option *ngFor="let score of scores" value="{{score}}">{{score}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="age">Age range</label>
+        <div name="age">
+          <div class="form-group">
+            <label for="minimumage">Min</label>
+            <select name="minimumage" id="minimumage" class="form-control" [(ngModel)]="model.minimumage">
+              <option *ngFor="let age of ages" value="{{age}}">{{age}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="maximumage">Max</label>
+            <select name="maximumage" id="maximumage" class="form-control" [(ngModel)]="model.maximumage">
+              <option *ngFor="let age of ages" value="{{age}}">{{age}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="height">Height range (cm)</label>
+        <div name="height">
+          <div class="form-group">
+            <label for="minimumheight">Min</label>
+            <select name="minimumheight" id="minimumheight" class="form-control" [(ngModel)]="model.minimumheight">
+              <option *ngFor="let height of heights" value="{{height}}">{{height}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="maximumheight">Max</label>
+            <select name="maximumheight" id="maximumheight" class="form-control" [(ngModel)]="model.maximumheight">
+              <option *ngFor="let height of heights" value="{{height}}">{{height}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="distance">Distance (km)</label>
+        <select name="distance" id="distance" class="form-control" [(ngModel)]="model.distanceinkm">
+          <option value=""></option>
+          <option value="30">lower bound 30 km</option>
+          <option value="300">upper bound 300 km</option>
+        </select>
+      </div>
+      <div class="form-group">
+          <label for="currentlongitude">Longitude</label>
+          <input type="text" class="form-control" id="currentlongitude" name="currentlongitude" [(ngModel)]="model.currentlongitude">
+      </div>
+      <div class="form-group">
+            <label for="currentlatitude">Latitude</label>
+            <input type="text" class="form-control" id="currentlatitude" name="currentlatitude" [(ngModel)]="model.currentlatitude">
+      </div>
+      <div class="form-group">
+        <button type="button" class="form-control" (click)="getUsers()">Get Users</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+<hr>
+<div class="container">
+  <table class="table table-striped">
+    <thead class="thead-inverse">
+      <tr>
+        <th scope="row">Name</th>
+        <th>Age</th>
+        <th>Height (cm)</th>
+        <th>Job Title</th>
+        <th>Photo</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="results">
+      <tr *ngFor="let user of hack(results.userdata)">
+        <td scope="row">{{user.displayname}}</td>
+        <td>{{user.age}}</td>
+        <td>{{user.height}}</td>
+        <td>{{user.jobtitle}}</td>
+        <td>
+          <div class="text-center col-xs-3">
+              <img src="{{user.mainphoto}}" class="rounded" style="max-height: 50px; max-width: 50px;"  alt="-">
+            </div>
+        </td>
+      </tr>
+    </tbody>
+    <tr *ngIf="results && hack(results.userdata).length < 1"><td colspan="4" style="color:red;text-align:center" >Nobody matches your search</td></tr>
+  </table>
+</div>
