@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://user-finder-server:8080/userfinder'
+  apiUrl: 'http://localhost:8080/userfinder'
 };
