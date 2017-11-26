@@ -29,6 +29,13 @@ The parameters of this service are.
 | `inquirerlatitude`        | it is the current latitude position of the inquirer user.			   |
 | `distancelowerbound`      | single selection: lower bound < distanceinkm, upper bound > distanceinkm     |
 
+
+To check service health, please go to the following api.
+
+```sh
+curl -g 'http://localhost:8080/health'
+```
+
 ### Usage examples ###
 
 * Search users that has a photo in its profile.
@@ -105,7 +112,7 @@ curl -g 'http://localhost:8080/health'
 
 * @angular/compiler-cli ^5.0.0
 
-* if you wish to execute the frontend from console, you could do the following:
+* if you wish to execute the frontend in development mode, you could do the following:
 
 ```sh
 ng serve --open
@@ -116,7 +123,6 @@ ng serve --open
 ```sh
 ng test
 ```
-
 
 3. To run the service and let it ready for consume, docker is required.
 
