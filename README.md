@@ -4,8 +4,11 @@ This service exposes a capability to search users that match a set of filters.
 
 ## What is this repository for? ##
 
-* Contains source code that implements a user finder service.
-* This implementation is just a back end using java and spring-boot technology.
+* Implementation for business case [Filtering Matches](https://github.com/affinitas/coding_exercises_options/blob/master/filtering_matches/README.md)
+* Contains source code that implements a user finder service and a user matches UI.
+* /src Java code implementation is just a back end using java and spring-boot technology.
+* /ui Angular code implementation is the User Interface to search users using a set of filters.
+
 
 ## Using service ##
 
