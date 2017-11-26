@@ -28,7 +28,6 @@ describe('UserFinderService', () => {
     userFinderService.getUsers(userFilter)
                    .subscribe(res => {
                      expect(res).toEqual(
-                       [
                          {
                            message: "hola", 
                            userdata: [
@@ -46,7 +45,6 @@ describe('UserFinderService', () => {
                              }
                           ]
                         }
-                       ]
                      );
                      done();
                    });
@@ -54,7 +52,7 @@ describe('UserFinderService', () => {
     let searchRequest = httpMock.expectOne('http://localhost:8080/userfinder?incontact=false&');
     
     httpMock.verify();
-    searchRequest.flush([ Object({ message: 'hola', userdata: [ Object({ id: '123', displayname: 'Fernando', age: 23, compatabilityScore: 23, contactsExchanged: 1, favourite: true, height: 180, jobtitle: 'engineer', mainphoto: '/uri/123.png', religion: 'catholism' }) ] }) ]);
+    searchRequest.flush(Object({ message: 'hola', userdata: [ Object({ id: '123', displayname: 'Fernando', age: 23, compatabilityScore: 23, contactsExchanged: 1, favourite: true, height: 180, jobtitle: 'engineer', mainphoto: '/uri/123.png', religion: 'catholism' }) ] }));
 
     httpMock.verify();
   });
