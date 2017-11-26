@@ -7,7 +7,7 @@ import { of } from 'rxjs/observable/of';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { Configuration } from '../app.constants';
+import { environment } from '../environments/environment';
 
 @Injectable()
 export class UserFinderService {
@@ -21,23 +21,23 @@ export class UserFinderService {
    * @param _configuration Application configuration object.
    */
   constructor(
-    private http: HttpClient, 
-    private _configuration: Configuration
-  ) { 
-    this.usersUrl = _configuration.ServerWithApiUrl;
+    private http: HttpClient
+  ) {
+    this.usersUrl = environment.apiUrl;
   }
 
   /**
    * Invoke the remote service to search users.
    */
-  getUsers(userFilter:UserFilter): Observable<Result[]> {
+  getUsers(userFilter:UserFilter): Observable<Result> {
     var queryparams = this.buildUserFinderQueryParams(userFilter);
     //this.http.request.
-    return this.http.get<Result[]>(this.usersUrl + queryparams)
+    var result = this.http.get<Result>(this.usersUrl + queryparams)
       .pipe(
         tap(result => this.log('fetched users')),
         catchError(this.handleError('getUsers', []))
       );
+    return <Observable<Result>>result;
   }
 
   /**

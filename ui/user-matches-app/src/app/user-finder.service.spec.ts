@@ -3,7 +3,6 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 
 import { UserFinderService } from './user-finder.service';
 import { UserFilter } from './user-filter'
-import { Configuration } from '../app.constants';
 import { Result } from './result';
 
 describe('UserFinderService', () => {
@@ -13,7 +12,7 @@ describe('UserFinderService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [Configuration, UserFinderService]
+      providers: [UserFinderService]
     });
     userFinderService = TestBed.get(UserFinderService);
     httpMock = TestBed.get(HttpTestingController);

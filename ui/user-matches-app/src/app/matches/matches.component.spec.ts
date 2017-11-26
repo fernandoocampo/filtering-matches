@@ -6,7 +6,6 @@ import { By }              from '@angular/platform-browser';
 import { MatchesComponent } from './matches.component';
 import { UserFilter } from '../user-filter';
 import { UserFinderService } from '../user-finder.service';
-import { Configuration } from '../../app.constants';
 
 describe('MatchesComponent', () => {
   let component: MatchesComponent;
@@ -19,7 +18,7 @@ describe('MatchesComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ MatchesComponent ],
       imports: [ FormsModule, HttpClientTestingModule ],
-      providers: [ Configuration, UserFinderService ]
+      providers: [ UserFinderService ]
     })
     .compileComponents();
     userFinderService = TestBed.get(UserFinderService);
@@ -86,7 +85,7 @@ describe('MatchesComponent', () => {
   it('Form child elements Count', () => {
     _tagListEl = fixture.debugElement.query(By.css('form')).nativeElement;
     fixture.detectChanges();
-    expect(_tagListEl.childElementCount).toEqual(9);
+    expect(_tagListEl.childElementCount).toEqual(10);
   });
   
 });

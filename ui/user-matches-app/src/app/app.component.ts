@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'user filter matches';
+  title = 'user filter matches (please choose a filter)';
 }

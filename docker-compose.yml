@@ -19,6 +19,8 @@ services:
             - mongodb
         volumes:
             - ./matches.json:/matches.json
+        depends_on:
+            - mongodb
 
     # Create index in mongo
     mongo-index:
@@ -35,6 +37,7 @@ services:
         build:
             context: ./
             dockerfile: Dockerfile.backend
+        container_name: "user-finder-server"
         links:
             - mongodb
         ports:
