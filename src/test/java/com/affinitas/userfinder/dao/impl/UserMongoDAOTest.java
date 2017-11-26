@@ -19,6 +19,7 @@ import org.mockito.Mockito;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.data.geo.Distance;
@@ -36,9 +37,10 @@ import org.springframework.data.mongodb.core.query.Query;
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)
+@DataMongoTest
 public class UserMongoDAOTest {
     
-    @SpyBean
+    @SpyBean()
     private MongoTemplate mongoTemplate;
     
     @Autowired

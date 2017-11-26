@@ -37,8 +37,17 @@ services:
         build:
             context: ./
             dockerfile: Dockerfile.backend
-        container_name: "user-finder-server"
         links:
             - mongodb
         ports:
             - 8080:8080
+
+    # frontend service
+    frontend-svc:
+        build:
+            context: ./
+            dockerfile: Dockerfile.frontend
+        links:
+            - backend-svc:user-finder-server
+        ports:
+            - 80:80
