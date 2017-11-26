@@ -1,12 +1,17 @@
-# To change this license header, choose License Headers in Project Properties.
-# To change this template file, choose Tools | Templates
-# and open the template in the editor.
-FROM iron/java:1.8
-VOLUME /tmp
-ADD target/user-finder-0.1.0.jar user-finder.jar
-RUN sh -c 'touch /user-finder.jar'
-ENV JAVA_OPTS=""
+# build backend service
+FROM maven:3.5-jdk-8
 
-ENTRYPOINT  ["/bin/sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /user-finder.jar"]
- 
+RUN mkdir -p /mvn_build
+WORKDIR /mvn_build
+COPY . /mvn_build
+RUN mvn package
+VOLUME /mvn_build
 
+
+# Run backend service
+FROM openjdk:8-jdk-alpine
+
+COPY ./global.properties /global.properties
+COPY --from=0 /mvn_build/target/user-finder-0.1.0.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar", "--spring.config.location=/global.properties"]

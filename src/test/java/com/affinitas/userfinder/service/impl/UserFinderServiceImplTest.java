@@ -60,6 +60,7 @@ public class UserFinderServiceImplTest {
      */
     @Test
     public void testFindUsers() throws Exception {
+        System.out.println("testFindUsers");
         // initialitates the data to simulate the dao object.
         SearchVO searchdata = UserFinderTestUtils.buildSearchData(200, true, true, true, null, null, null, null, null, null);
         List<User> users = UserFinderTestUtils.buildUsers();

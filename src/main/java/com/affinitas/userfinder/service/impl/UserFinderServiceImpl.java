@@ -96,9 +96,14 @@ public class UserFinderServiceImpl implements UserFinderService {
         }
 
         if (searchdata.getMinCompabilityScore() != null || searchdata.getMaxCompabilityScore() != null) {
-            Range compabilityscorerange = new Range(searchdata.getMinCompabilityScore(), searchdata.getMaxCompabilityScore());
-            compabilityscorerange.setDefaultMinimum(appconfig.getDefaultMinCompabilityScore());
-            compabilityscorerange.setDefaultMaximum(appconfig.getDefaultMaxCompabilityScore());
+            Double mincompscore = searchdata.getMinCompabilityScore().doubleValue() / 100.0;
+            Double maxcompscore = searchdata.getMaxCompabilityScore().doubleValue() / 100.0;
+            Double defaultmincompscore = appconfig.getDefaultMinCompabilityScore().doubleValue() / 100.0;
+            Double defaultmaxcompscore = appconfig.getDefaultMaxCompabilityScore().doubleValue() / 100.0;
+            
+            Range compabilityscorerange = new Range(mincompscore, maxcompscore);
+            compabilityscorerange.setDefaultMinimum(defaultmincompscore);
+            compabilityscorerange.setDefaultMaximum(defaultmaxcompscore);
             filter.setCompabilityScore(compabilityscorerange);
         }
 

@@ -27,6 +27,8 @@ services:
             mongo --host mongodb affinitas  --eval "db.users.createIndex( { 'city.loc': '2dsphere' } )"
         links:
             - mongodb
+        depends_on:
+            - mongo-init
 
     # backend service
     backend-svc:

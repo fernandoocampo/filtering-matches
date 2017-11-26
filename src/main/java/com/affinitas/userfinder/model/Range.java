@@ -24,19 +24,19 @@ public class Range {
     /**
      * The minimum value of the range.
      */
-    private Integer minimum;
+    private Number minimum;
     /**
      * The minimum value by default to use if minimum is empty.
      */
-    private Integer defaultMinimum;
+    private Number defaultMinimum;
     /**
      * The maximum value of the range.
      */
-    private Integer maximum;
+    private Number maximum;
     /**
      * The maximum value by default to use if maximum is empty.
      */
-    private Integer defaultMaximum;
+    private Number defaultMaximum;
 
     public Range() {
     }
@@ -50,7 +50,16 @@ public class Range {
         }
     }
 
-    public Integer getMinimum() {
+    public Range(Number minimum, Number maximum) {
+        if(minimum != null) {
+            setMinimum(minimum);
+        }
+        if(maximum != null) {
+            setMaximum(maximum);
+        }
+    }
+
+    public Number getMinimum() {
         if(!hasMinimum) {
             return defaultMinimum;
         }
@@ -62,7 +71,7 @@ public class Range {
         this.hasMinimum = true;
     }
 
-    public Integer getMaximum() {
+    public Number getMaximum() {
         if(!hasMaximum) {
             return defaultMaximum;
         }
@@ -70,6 +79,16 @@ public class Range {
     }
 
     public void setMaximum(Integer maximum) {
+        this.maximum = maximum;
+        this.hasMaximum = true;
+    }
+
+    public void setMinimum(Number minimum) {
+        this.minimum = minimum;
+        this.hasMinimum = true;
+    }
+
+    public void setMaximum(Number maximum) {
         this.maximum = maximum;
         this.hasMaximum = true;
     }
@@ -90,11 +109,11 @@ public class Range {
         return !hasMinimum && !hasMaximum;
     }
 
-    public void setDefaultMinimum(Integer defaultMinimum) {
+    public void setDefaultMinimum(Number defaultMinimum) {
         this.defaultMinimum = defaultMinimum;
     }
 
-    public void setDefaultMaximum(Integer defaultMaximum) {
+    public void setDefaultMaximum(Number defaultMaximum) {
         this.defaultMaximum = defaultMaximum;
     }
 
