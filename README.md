@@ -16,7 +16,7 @@ This service exposes a capability to search users that match a set of filters.
 * Clone the project:
 
 ```sh
-git clone https://github.com/fernandoocampo/user-finder.git
+git clone https://github.com/fernandoocampo/filtering-matches.git
 cd ./user-finder
 ```
 
