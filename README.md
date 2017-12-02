@@ -17,7 +17,7 @@ This service exposes a capability to search users that match a set of filters.
 
 ```sh
 git clone https://github.com/fernandoocampo/filtering-matches.git
-cd ./user-finder
+cd ./filtering-matches
 ```
 
 * Execute docker-compose and wait the project is built.
